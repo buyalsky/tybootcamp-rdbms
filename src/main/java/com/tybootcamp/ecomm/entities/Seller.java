@@ -1,24 +1,23 @@
 package com.tybootcamp.ecomm.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import com.tybootcamp.ecomm.enums.Gender;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "sellers")
-public class Seller
+public class Seller extends Profile
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    @NotNull
     private String accountId;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "seller", orphanRemoval = true)
-    private Profile profile;
 
     public Seller()
     {
+    }
+
+    public Seller(String firstName, String lastName, Gender gender, String accountId) {
+        super(firstName, lastName, gender);
+        this.accountId = accountId;
     }
 
     public Seller(String accountId)
@@ -26,47 +25,20 @@ public class Seller
         this.accountId = accountId;
     }
 
-    public long getId()
-    {
-        return id;
-    }
-
-    public void setId(long id)
-    {
-        this.id = id;
-    }
-
-    public String getAccountId()
-    {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId)
-    {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
-    public Profile getProfile()
-    {
-        return profile;
-    }
-
-    public void setProfile(Profile profile)
-    {
-        this.profile = profile;
-    }
-
     @Override
-    public String toString()
-    {
-        if (profile == null)
-        {
-            return super.toString();
-        }
-        else
-        {
-            return getProfile().getFirstName() + " " + getProfile().getLastName();
-        }
+    public String toString() {
+        return "Seller{" +
+                "id=" + id +
+                ", accountId='" + accountId + '\'' +
+                '}';
     }
 }
 

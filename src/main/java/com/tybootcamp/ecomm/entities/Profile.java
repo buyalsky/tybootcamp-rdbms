@@ -1,30 +1,18 @@
 package com.tybootcamp.ecomm.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tybootcamp.ecomm.enums.Gender;
-
-import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
-public class Profile
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Profile
 {
     @Id
-    private Long id;
-    @OneToOne
-    @JoinColumn(nullable = false)
-    @MapsId
-    @JsonIgnore
-    private Seller seller;
-
-
-    @OneToOne
-    @JoinColumn(nullable = false)
-    @MapsId
-    @JsonIgnore
-    private Customer customer;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
 
     @NotNull
     private String firstName;
@@ -44,32 +32,21 @@ public class Profile
     {
     }
 
-    public Profile(Seller seller, String firstName, String lastName, Gender gender)
+    public Profile(String firstName, String lastName, Gender gender)
     {
-        this.seller = seller;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
     }
 
-    public long getId()
+    public Long getId()
     {
         return id;
     }
 
-    public void setId(long id)
+    public void setId(Long id)
     {
         this.id = id;
-    }
-
-    public Seller getSeller()
-    {
-        return seller;
-    }
-
-    public void setSeller(Seller seller)
-    {
-        this.seller = seller;
     }
 
     public String getFirstName()

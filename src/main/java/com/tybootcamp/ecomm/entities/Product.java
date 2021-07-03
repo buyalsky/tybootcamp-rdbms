@@ -1,12 +1,11 @@
 package com.tybootcamp.ecomm.entities;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "products",indexes = @Index(columnList = "name"))
@@ -19,7 +18,7 @@ public class Product
     private String name2;
     private String description;
     @NotNull
-    private float price;
+    private Double price;
 
     @ElementCollection
     @CollectionTable(name = "Product_Images", joinColumns = @JoinColumn(name = "product_id", nullable = false))
@@ -46,7 +45,7 @@ public class Product
     {
     }
 
-    public Product(String name2, String name, String description, float price, List<String> images, Seller seller, HashSet<Category> fallIntoCategories)
+    public Product(String name2, String name, String description, Double price, List<String> images, Seller seller, HashSet<Category> fallIntoCategories)
     {
         this.name = name;
         this.name2 = name2;
@@ -99,12 +98,12 @@ public class Product
         this.description = description;
     }
 
-    public float getPrice()
+    public Double getPrice()
     {
         return price;
     }
 
-    public void setPrice(float price)
+    public void setPrice(Double price)
     {
         this.price = price;
     }
