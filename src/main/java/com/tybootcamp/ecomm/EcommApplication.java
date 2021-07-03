@@ -81,7 +81,7 @@ public class EcommApplication implements CommandLineRunner {
                 i -> {
                     Book book = new Faker().book();
                     String author = book.author();
-                    Product pictureProduct = new Product(author, author,
+                    Product pictureProduct = new Product(author,
                             book.title(),
                             42.34, imageUrls, finalMichael, new HashSet<>(Arrays.asList(finalArtCategory, finalWallDecorCategory)));
                     _productRepository.save(pictureProduct);
@@ -89,7 +89,7 @@ public class EcommApplication implements CommandLineRunner {
         );
 
         Customer customer = new Customer();
-        customer.setName("Kyle");
+        customer.setFirstName("Kyle");
         customer.setBirthday(new Date());
         customer.setLastName("Lowry");
         customer.setEmailAddress("kyle@mail.com");

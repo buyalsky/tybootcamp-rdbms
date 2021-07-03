@@ -18,7 +18,6 @@ public abstract class Profile
     private String firstName;
     @NotNull
     private String lastName;
-    private String website;
     @Temporal(TemporalType.DATE)
     private Date birthday;
     private String address;
@@ -28,12 +27,10 @@ public abstract class Profile
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public Profile()
-    {
+    public Profile() {
     }
 
-    public Profile(String firstName, String lastName, Gender gender)
-    {
+    public Profile(String firstName, String lastName, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -67,16 +64,6 @@ public abstract class Profile
     public void setLastName(String lastName)
     {
         this.lastName = lastName;
-    }
-
-    public String getWebsite()
-    {
-        return website;
-    }
-
-    public void setWebsite(String website)
-    {
-        this.website = website;
     }
 
     public Date getBirthday()

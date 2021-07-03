@@ -15,7 +15,6 @@ public class Product
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    private String name2;
     private String description;
     @NotNull
     private Double price;
@@ -45,10 +44,9 @@ public class Product
     {
     }
 
-    public Product(String name2, String name, String description, Double price, List<String> images, Seller seller, HashSet<Category> fallIntoCategories)
+    public Product(String name, String description, Double price, List<String> images, Seller seller, HashSet<Category> fallIntoCategories)
     {
         this.name = name;
-        this.name2 = name2;
         this.description = description;
         this.price = price;
         this.images = images;
@@ -75,18 +73,6 @@ public class Product
     {
         this.name = name;
     }
-
-
-    public String getName2()
-    {
-        return name2;
-    }
-
-    public void setName2(String name2)
-    {
-        this.name2 = name2;
-    }
-
 
     public String getDescription()
     {

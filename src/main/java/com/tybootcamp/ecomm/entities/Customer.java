@@ -9,9 +9,6 @@ import java.util.Set;
 @Table(name = "customers")
 public class Customer extends Profile {
 
-    @NotNull
-    private String name;
-
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
@@ -29,14 +26,6 @@ public class Customer extends Profile {
         order.setCustomer(this);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
@@ -44,5 +33,13 @@ public class Customer extends Profile {
     public void setShoppingCart(ShoppingCart shoppingCart) {
         shoppingCart.setCustomer(this);
         this.shoppingCart = shoppingCart;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

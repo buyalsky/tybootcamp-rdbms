@@ -7,12 +7,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sellers")
-public class Seller extends Profile
-{
+public class Seller extends Profile {
     private String accountId;
 
-    public Seller()
-    {
+    private String website;
+
+    public Seller() {
     }
 
     public Seller(String firstName, String lastName, Gender gender, String accountId) {
@@ -31,6 +31,14 @@ public class Seller extends Profile
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     @Override
