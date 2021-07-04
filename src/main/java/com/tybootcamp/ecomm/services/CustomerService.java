@@ -30,6 +30,7 @@ public class CustomerService {
 
     public void deleteCustomer(Long customerId) {
         Customer customer = getCustomerById(customerId);
+        repository.delete(customer);
     }
 
     public Customer updateCustomer(Customer newCustomer) {
