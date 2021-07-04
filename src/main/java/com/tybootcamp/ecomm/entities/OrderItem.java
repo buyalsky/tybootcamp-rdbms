@@ -3,6 +3,7 @@ package com.tybootcamp.ecomm.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class OrderItem {
@@ -62,6 +63,19 @@ public class OrderItem {
         return order;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return quantity == orderItem.quantity && Objects.equals(id, orderItem.id) && Objects.equals(productId, orderItem.productId) && Objects.equals(soldPrice, orderItem.soldPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, productId, soldPrice, quantity);
+    }
+
     public static OrderItem from(ShoppingItem shoppingItem) {
         OrderItem orderItem = new OrderItem();
         Product product = shoppingItem.getProduct();
@@ -70,5 +84,7 @@ public class OrderItem {
         orderItem.setSoldPrice(product.getPrice());
         return orderItem;
     }
+
+
 
 }

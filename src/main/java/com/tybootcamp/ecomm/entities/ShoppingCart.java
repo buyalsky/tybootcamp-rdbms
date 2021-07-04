@@ -3,6 +3,8 @@ package com.tybootcamp.ecomm.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,8 +19,8 @@ public class ShoppingCart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart", orphanRemoval = true)
-    private Set<ShoppingItem> shoppingItems;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart", orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<ShoppingItem> shoppingItems = new HashSet<>();
 
     @Transient
     private double totalAmount;
@@ -36,7 +38,9 @@ public class ShoppingCart {
     }
 
     public void setShoppingItems(Set<ShoppingItem> shoppingItems) {
-        this.shoppingItems = shoppingItems;
+        this.shoppingItems.clear();
+        if (shoppingItems != null)
+            this.shoppingItems.addAll(shoppingItems);
     }
 
     public double getTotalAmount() {
@@ -62,4 +66,16 @@ public class ShoppingCart {
         this.shoppingItems.clear();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingCart that = (ShoppingCart) o;
+        return Double.compare(that.totalAmount, totalAmount) == 0 && Objects.equals(customer, that.customer) && Objects.equals(shoppingItems, that.shoppingItems);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customer, shoppingItems, totalAmount);
+    }
 }

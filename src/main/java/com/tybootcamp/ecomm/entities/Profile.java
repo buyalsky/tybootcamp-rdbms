@@ -1,10 +1,12 @@
 package com.tybootcamp.ecomm.entities;
 
 import com.tybootcamp.ecomm.enums.Gender;
+import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -35,7 +37,6 @@ public abstract class Profile
         this.lastName = lastName;
         this.gender = gender;
     }
-
     public Long getId()
     {
         return id;
@@ -105,4 +106,18 @@ public abstract class Profile
     {
         this.gender = gender;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile profile = (Profile) o;
+        return Objects.equals(id, profile.id) && firstName.equals(profile.firstName) && lastName.equals(profile.lastName) && DateUtils.isSameDay(birthday, profile.birthday) && Objects.equals(address, profile.address) && Objects.equals(emailAddress, profile.emailAddress) && gender == profile.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, birthday, address, emailAddress, gender);
+    }
+
 }

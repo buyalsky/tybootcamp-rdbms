@@ -1,8 +1,11 @@
 package com.tybootcamp.ecomm.entities;
 
+import com.tybootcamp.ecomm.enums.Gender;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,11 +15,17 @@ public class Customer extends Profile {
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
     public Customer(){
 
+    }
+
+    public Customer(String firstName, String lastName, Gender gender, ShoppingCart shoppingCart, Set<Order> orders) {
+        super(firstName, lastName, gender);
+        this.shoppingCart = shoppingCart;
+        this.orders = orders;
     }
 
     public void addOrder(Order order) {
